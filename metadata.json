@@ -1,0 +1,6 @@
+{
+  "name": "Copy of Free Website Service App",
+  "description": "An application for users to request free websites and for admins to manage these requests. Integrated with Gemini API for a dynamic greeting.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

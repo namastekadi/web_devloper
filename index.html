@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Website Requests</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --background-color: #f8f9fa;
+      --surface-color: #ffffff;
+      --text-color: #212529;
+      --light-text-color: #f8f9fa;
+      --border-color: #dee2e6;
+      --success-color: #28a745;
+      --error-color: #dc3545;
+      --font-family: 'Inter', sans-serif;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --container-padding: 16px;
+      --input-padding: 10px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Ensure #root and body take full height for flex layout */
+    html, body, #app-container {
+        height: 100%;
+    }
+
+    #app-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: var(--container-padding);
+      flex-grow: 1;
+    }
+
+    header, footer {
+      background-color: var(--primary-color);
+      color: var(--light-text-color);
+      padding: 1rem var(--container-padding);
+      text-align: center;
+    }
+    
+    footer {
+        margin-top: auto; /* Pushes footer to the bottom */
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0.5rem;
+    }
+
+    nav ul li button, nav ul li a {
+      color: var(--light-text-color);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: var(--border-radius);
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    nav ul li button:hover, nav ul li a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    nav ul li button.active {
+      background-color: rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+    }
+
+    .page-content {
+      padding: 2rem 0;
+      background-color: var(--surface-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      /* Add padding inside the content area */
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+    
+    .page-content > section { /* Target direct children sections */
+        padding-left: 1rem; /* Example padding, adjust as needed */
+        padding-right: 1rem;
+    }
+
+
+    .page-content h1, .page-content h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: var(--input-padding);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-group input[type="file"] {
+        border: 1px dashed var(--border-color);
+        padding: var(--input-padding);
+    }
+
+    .file-preview {
+        max-width: 150px;
+        max-height: 150px;
+        margin-top: 10px;
+        border: 1px solid var(--border-color);
+        padding: 5px;
+        border-radius: var(--border-radius);
+    }
+
+    button, .button {
+      background-color: var(--primary-color);
+      color: var(--light-text-color);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    button:hover, .button:hover {
+      background-color: #0056b3;
+    }
+    
+    button.link-button {
+        background:none;
+        border:none;
+        color:var(--primary-color);
+        text-decoration:underline;
+        cursor:pointer;
+        padding:0;
+        font-size:inherit;
+    }
+    button.link-button:hover {
+        text-decoration: none;
+    }
+
+
+    button.secondary {
+      background-color: var(--secondary-color);
+    }
+
+    button.secondary:hover {
+      background-color: #545b62;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-item, .order-card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .portfolio-item:hover, .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-item h3, .order-card h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .contact-links p {
+        margin-bottom: 0.8rem;
+    }
+    .contact-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+
+    .admin-dashboard {
+      /* Styles for admin dashboard specific elements */
+    }
+
+    .order-filters {
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .order-filters label {
+      font-weight: 600;
+    }
+
+    .order-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .order-list li {
+      margin-bottom: 1rem;
+    }
+
+    .order-details p {
+        margin: 0.3rem 0;
+        word-break: break-word;
+    }
+    .order-details strong {
+        color: var(--primary-color);
+    }
+
+    .order-status-select {
+        padding: 0.3rem 0.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        margin-left: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .loading-message, .error-message, .success-message, .info-message {
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+    }
+
+    .loading-message {
+      color: var(--secondary-color);
+    }
+
+    .error-message {
+      background-color: #f8d7da;
+      color: var(--error-color);
+      border: 1px solid #f5c6cb;
+    }
+
+    .success-message {
+      background-color: #d4edda;
+      color: var(--success-color);
+      border: 1px solid #c3e6cb;
+    }
+
+    .info-message {
+      background-color: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+
+    footer a {
+        color: var(--light-text-color);
+        text-decoration: underline;
+    }
+    footer a:hover {
+        text-decoration: none;
+    }
+    footer button.link-button {
+        color: var(--light-text-color);
+    }
+
+
+    /* Notification styles */
+    .notification-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: clamp(250px, 80vw, 350px); /* Responsive width */
+    }
+
+    .notification {
+      background-color: var(--surface-color);
+      color: var(--text-color);
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      display: flex;
+      align-items: flex-start; /* Align items to top for multi-line text */
+      opacity: 0;
+      transform: translateX(100%);
+      animation: slideIn 0.5s forwards;
+      min-width: 250px; /* Ensure a minimum width */
+    }
+
+    .notification.success {
+      border-left: 5px solid var(--success-color);
+    }
+
+    .notification.error {
+      border-left: 5px solid var(--error-color);
+    }
+
+    .notification.info {
+      border-left: 5px solid var(--primary-color);
+    }
+
+    .notification p {
+      margin: 0;
+      flex-grow: 1;
+      word-break: break-word; /* Prevent overflow */
+    }
+
+    .notification .close-btn {
+      background: none;
+      border: none;
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0 0 0 10px;
+      line-height: 1; /* Ensure button aligns well with text */
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      .container {
+        width: 95%;
+        padding: 10px;
+      }
+      .page-content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .page-content > section {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+       .notification-container {
+        right: 10px;
+        top: 10px;
+        width: calc(100% - 20px); /* Full width with some padding */
+      }
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://esm.sh/@google/genai@^0.14.0"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app-container">
+    <div id="notification-root-container" class="notification-container"></div>
+
+    <header id="navbar-container">
+        <!-- Navbar will be rendered here by JS -->
+    </header>
+
+    <main class="container">
+        <div id="page-content-container" class="page-content">
+            <!-- Page content will be rendered here by JS -->
+        </div>
+    </main>
+
+    <footer id="footer-container">
+        <!-- Footer will be rendered here by JS -->
+    </footer>
+  </div>
+
+  <script type="module">
+    import { GoogleGenAI } from '@google/genai';
+
+    // --- Constants ---
+    const PAGES = {
+      LANDING: 'LANDING',
+      ORDER_FORM: 'ORDER_FORM',
+      TRACK_ORDER: 'TRACK_ORDER',
+      PORTFOLIO: 'PORTFOLIO',
+      CONTACT: 'CONTACT',
+      ADMIN_LOGIN: 'ADMIN_LOGIN',
+      ADMIN_DASHBOARD: 'ADMIN_DASHBOARD',
+    };
+
+    const ORDER_STATUSES = {
+      NEW: 'New',
+      IN_PROGRESS: 'In Progress',
+      COMPLETED: 'Completed',
+    };
+
+    const ADMIN_PASSWORD = 'admin123'; // IMPORTANT: Not secure for production
+    const INSTAGRAM_USERNAME = 'web__devloper_'; // Replace with your Instagram username
+
+    // --- Global State ---
+    let currentPage = PAGES.LANDING;
+    let isAdmin = false;
+    let orders = [];
+    let geminiGreeting = 'Welcome!';
+    let isLoadingGreeting = true;
+    let activeNotifications = [];
+    let logoFileCache = null; // For order form logo file
+
+    // --- DOM Element References ---
+    let navbarContainer, pageContentContainer, footerContainer, notificationRootContainer;
+
+    // --- Helper Functions ---
+    const generateId = () => Math.random().toString(36).substr(2, 9);
+
+    const escapeHTML = (str) => {
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/[&<>"']/g, function (match) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[match];
+        });
+    };
+    
+    // --- Notification Logic ---
+    function addNotification(message, type = 'info') {
+      const id = generateId();
+      activeNotifications.push({ id, message, type });
+      renderNotifications();
+      setTimeout(() => {
+        removeNotificationById(id);
+      }, 5000);
+    }
+
+    function removeNotificationById(id) {
+      activeNotifications = activeNotifications.filter(n => n.id !== id);
+      renderNotifications();
+    }
+
+    function renderNotifications() {
+      if (!notificationRootContainer) return;
+      notificationRootContainer.innerHTML = '';
+      activeNotifications.forEach(n => {
+        const notificationEl = document.createElement('div');
+        notificationEl.className = `notification ${n.type}`;
+        notificationEl.setAttribute('role', 'alert');
+        notificationEl.innerHTML = `
+          <p>${escapeHTML(n.message)}</p>
+          <button class="close-btn" aria-label="Close notification">&times;</button>
+        `;
+        notificationEl.querySelector('.close-btn').addEventListener('click', () => removeNotificationById(n.id));
+        notificationRootContainer.appendChild(notificationEl);
+      });
+    }
+
+    // --- LocalStorage Management ---
+    function loadStateFromLocalStorage() {
+        const storedOrders = localStorage.getItem('websiteOrders');
+        if (storedOrders) {
+            try {
+                orders = JSON.parse(storedOrders);
+            } catch (e) {
+                console.error("Failed to parse orders from localStorage", e);
+                orders = [];
+            }
+        }
+        isAdmin = localStorage.getItem('isAdmin') === 'true';
+    }
+
+    function saveOrdersToLocalStorage() {
+        localStorage.setItem('websiteOrders', JSON.stringify(orders));
+    }
+
+    function saveAdminStatusToLocalStorage() {
+        localStorage.setItem('isAdmin', isAdmin.toString());
+    }
+
+    // --- Gemini API ---
+    async function fetchGreetingFromGemini() {
+        if (currentPage !== PAGES.LANDING) return;
+        isLoadingGreeting = true;
+        renderPageContent(); // Re-render to show loading
+
+        try {
+            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY }); // API_KEY must be in process.env
+            const response = await ai.models.generateContentStream({
+                model: 'gemini-2.5-flash-preview-04-17',
+                contents: 'Write a friendly and exciting welcome message (max 15 words) for a service that builds free websites for people, include a relevant emoji like ✨ or 🎉.',
+            });
+            
+            let greeting = '';
+            for await (const chunk of response) {
+                greeting += chunk.text;
+            }
+            geminiGreeting = greeting || 'Create your dream website, for free! ✨';
+        } catch (error) {
+            console.error('Failed to generate greeting:', error);
+            geminiGreeting = 'Welcome to our free website service! 🎉';
+            addNotification('Could not fetch dynamic greeting.', 'error');
+        } finally {
+            isLoadingGreeting = false;
+            if (currentPage === PAGES.LANDING) {
+                renderPageContent(); // Re-render to show greeting
+            }
+        }
+    }
+
+    // --- Rendering Functions ---
+    function renderNavbar() {
+      const navItems = [
+        { page: PAGES.LANDING, label: 'Home' },
+        { page: PAGES.ORDER_FORM, label: 'Request Website' },
+        { page: PAGES.TRACK_ORDER, label: 'Track Order' },
+        { page: PAGES.PORTFOLIO, label: 'Portfolio' },
+        { page: PAGES.CONTACT, label: 'Contact' },
+      ];
+
+      let navHtml = '<nav aria-label="Main navigation"><ul>';
+      navItems.forEach(item => {
+        navHtml += `
+          <li>
+            <button data-page="${item.page}" class="${currentPage === item.page ? 'active' : ''}" aria-current="${currentPage === item.page ? 'page' : 'false'}">
+              ${escapeHTML(item.label)}
+            </button>
+          </li>`;
+      });
+
+      if (isAdmin) {
+        navHtml += `
+          <li>
+            <button data-page="${PAGES.ADMIN_DASHBOARD}" class="${currentPage === PAGES.ADMIN_DASHBOARD ? 'active' : ''}" aria-current="${currentPage === PAGES.ADMIN_DASHBOARD ? 'page' : 'false'}">
+              Admin Dashboard
+            </button>
+          </li>
+          <li><button id="admin-logout-btn">Logout Admin</button></li>`;
+      }
+      navHtml += '</ul></nav>';
+      navbarContainer.innerHTML = navHtml;
+
+      // Add event listeners to nav buttons
+      navbarContainer.querySelectorAll('button[data-page]').forEach(button => {
+        button.addEventListener('click', (e) => navigateTo(e.currentTarget.dataset.page));
+      });
+      if (isAdmin) {
+        document.getElementById('admin-logout-btn')?.addEventListener('click', handleAdminLogout);
+      }
+    }
+
+    function renderFooter() {
+      footerContainer.innerHTML = `
+        <p>&copy; ${new Date().getFullYear()} Free Website Service by ${escapeHTML(INSTAGRAM_USERNAME)}. All rights reserved.</p>
+        <p>
+          Not an admin? <button id="footer-admin-login-btn" class="link-button" style="background:none; border:none; color:var(--light-text-color); text-decoration:underline; cursor:pointer; padding:0; font-size:inherit;">Admin Login</button>
+        </p>`;
+      document.getElementById('footer-admin-login-btn')?.addEventListener('click', () => navigateTo(PAGES.ADMIN_LOGIN));
+    }
+
+    function renderPageContent() {
+      let contentHtml = '';
+      switch (currentPage) {
+        case PAGES.LANDING:
+          contentHtml = `
+            <section aria-labelledby="landing-title">
+              <h1 id="landing-title">${isLoadingGreeting ? "Loading..." : escapeHTML(geminiGreeting)}</h1>
+              <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                I create beautiful, functional websites for individuals and businesses, completely free of charge!
+                Let's bring your vision to life.
+              </p>
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <button id="request-website-btn" class="button" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                  Request Your Free Website Now
+                </button>
+              </div>
+              <p style="text-align: center;">
+                Follow my journey and see more on Instagram: 
+                <a href="https://instagram.com/${escapeHTML(INSTAGRAM_USERNAME)}" target="_blank" rel="noopener noreferrer" aria-label="Follow ${escapeHTML(INSTAGRAM_USERNAME)} on Instagram">
+                  @${escapeHTML(INSTAGRAM_USERNAME)}
+                </a>
+              </p>
+            </section>`;
+          break;
+        case PAGES.ORDER_FORM:
+          contentHtml = `
+            <section aria-labelledby="order-form-title">
+              <h2 id="order-form-title">Request Your Free Website</h2>
+              <form id="order-form">
+                <div class="form-group">
+                  <label for="name">Your Name*</label>
+                  <input type="text" id="name" name="name" required aria-required="true" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Your Email*</label>
+                  <input type="email" id="email" name="email" required aria-required="true" />
+                </div>
+                <div class="form-group">
+                  <label for="businessName">Business/Brand Name</label>
+                  <input type="text" id="businessName" name="businessName" />
+                </div>
+                <div class="form-group">
+                  <label for="websiteType">Type of Website</label>
+                  <select id="websiteType" name="websiteType">
+                    <option value="Portfolio">Portfolio</option>
+                    <option value="Blog">Blog</option>
+                    <option value="Business">Small Business</option>
+                    <option value="Online Store">Online Store (Basic)</option>
+                    <option value="Personal">Personal Site</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inspiration">Design Inspiration (Optional)</label>
+                  <textarea id="inspiration" name="inspiration" placeholder="e.g., colors, styles, example websites..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="logoUpload">Upload Logo/Image (Optional, max 2MB)</label>
+                  <input type="file" id="logoUpload" name="logoUpload" accept="image/png, image/jpeg, image/gif, image/svg+xml" />
+                  <img id="logoPreview" src="#" alt="Logo preview" class="file-preview" style="display:none;" />
+                </div>
+                <button type="submit">Submit Request</button>
+              </form>
+            </section>`;
+          break;
+        case PAGES.TRACK_ORDER:
+           contentHtml = `
+            <section aria-labelledby="tracker-title">
+              <h2 id="tracker-title">Track Your Order</h2>
+              <form id="track-order-form">
+                <div class="form-group">
+                  <label for="orderId">Enter Your Order ID</label>
+                  <input type="text" id="orderId" name="orderId" />
+                </div>
+                <button type="submit">Track Status</button>
+              </form>
+              <div id="order-tracking-results"></div>
+            </section>`;
+          break;
+        case PAGES.PORTFOLIO:
+          const portfolioItems = [
+            { id: 1, title: 'Creative Artist Portfolio', description: 'A sleek portfolio for a visual artist.', imageUrl: 'https://via.placeholder.com/300x200/007BFF/FFFFFF?Text=Portfolio+1', liveLink: '#' },
+            { id: 2, title: 'Local Bakery Website', description: 'A charming website for a neighborhood bakery.', imageUrl: 'https://via.placeholder.com/300x200/6C757D/FFFFFF?Text=Bakery+Site', liveLink: '#' },
+            { id: 3, title: 'Tech Blog Layout', description: 'A modern and clean design for a tech blogger.', imageUrl: 'https://via.placeholder.com/300x200/28A745/FFFFFF?Text=Tech+Blog', liveLink: '#' },
+          ];
+          contentHtml = `
+            <section aria-labelledby="portfolio-title">
+              <h2 id="portfolio-title">My Past Work</h2>
+              ${portfolioItems.length === 0 ? '<p>Portfolio coming soon! Check back later to see examples of websites I\'ve built.</p>' : `
+                <div class="portfolio-grid">
+                  ${portfolioItems.map(item => `
+                    <article key="${item.id}" class="portfolio-item" aria-labelledby="portfolio-item-title-${item.id}">
+                      <img src="${escapeHTML(item.imageUrl)}" alt="${escapeHTML(item.title)}" />
+                      <h3 id="portfolio-item-title-${item.id}">${escapeHTML(item.title)}</h3>
+                      <p>${escapeHTML(item.description)}</p>
+                      <!-- <a href="${escapeHTML(item.liveLink)}" target="_blank" rel="noopener noreferrer" class="button secondary">View Site</a> -->
+                    </article>
+                  `).join('')}
+                </div>
+              `}
+            </section>`;
+          break;
+        case PAGES.CONTACT:
+          contentHtml = `
+            <section aria-labelledby="contact-title">
+              <h2 id="contact-title">Get In Touch</h2>
+              <p>Have questions or want to discuss your project further? Reach out through any of these channels:</p>
+              <div class="contact-links">
+                <p><strong>Instagram DMs:</strong> <a href="https://instagram.com/${escapeHTML(INSTAGRAM_USERNAME)}" target="_blank" rel="noopener noreferrer" aria-label="DM ${escapeHTML(INSTAGRAM_USERNAME)} on Instagram">@${escapeHTML(INSTAGRAM_USERNAME)}</a> (Preferred for quick queries)</p>
+                <p><strong>Email:</strong> <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></p>
+              </div>
+            </section>`;
+          break;
+        case PAGES.ADMIN_LOGIN:
+          contentHtml = `
+            <section aria-labelledby="admin-login-title">
+              <h2 id="admin-login-title">Admin Login</h2>
+              <form id="admin-login-form">
+                <div class="form-group">
+                  <label for="adminPassword">Password</label>
+                  <input type="password" id="adminPassword" name="adminPassword" />
+                </div>
+                <button type="submit">Login</button>
+              </form>
+            </section>`;
+          break;
+        case PAGES.ADMIN_DASHBOARD:
+          if (!isAdmin) {
+            contentHtml = `<p class="error-message">Access Denied. Please <button id="redirect-admin-login-btn" class="link-button">login as admin</button>.</p>`;
+          } else {
+            contentHtml = `
+              <section class="admin-dashboard" aria-labelledby="admin-dashboard-title">
+                <h2 id="admin-dashboard-title">Admin Dashboard</h2>
+                <p>Total Orders: ${orders.length}</p>
+                <div class="order-filters">
+                  <label for="statusFilter">Filter by Status:</label>
+                  <select id="statusFilter">
+                    <option value="All">All</option>
+                    <option value="${ORDER_STATUSES.NEW}">${ORDER_STATUSES.NEW}</option>
+                    <option value="${ORDER_STATUSES.IN_PROGRESS}">${ORDER_STATUSES.IN_PROGRESS}</option>
+                    <option value="${ORDER_STATUSES.COMPLETED}">${ORDER_STATUSES.COMPLETED}</option>
+                  </select>
+                </div>
+                <div id="admin-order-list-container"></div>
+              </section>`;
+          }
+          break;
+        default:
+          contentHtml = '<p>Page not found.</p>';
+      }
+      pageContentContainer.innerHTML = contentHtml;
+      attachPageSpecificEventListeners();
+      if (currentPage === PAGES.ADMIN_DASHBOARD && isAdmin) {
+        renderAdminOrderList(); // Initial render of order list if on dashboard
+      }
+    }
+    
+    function renderAdminOrderList(filterStatus = 'All') {
+        const orderListContainer = document.getElementById('admin-order-list-container');
+        if (!orderListContainer) return;
+
+        const filteredOrders = orders
+            .filter(order => filterStatus === 'All' || order.status === filterStatus)
+            .sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
+
+        if (filteredOrders.length === 0) {
+            orderListContainer.innerHTML = `<p class="info-message">No orders match the current filter.</p>`;
+            return;
+        }
+
+        let listHtml = '<ul class="order-list">';
+        filteredOrders.forEach(order => {
+            listHtml += `
+            <li key="${order.id}" class="order-card">
+                <div class="order-details">
+                    <h3>Order ID: ${escapeHTML(order.id)}</h3>
+                    <p><strong>Name:</strong> ${escapeHTML(order.name)}</p>
+                    <p><strong>Email:</strong> <a href="mailto:${escapeHTML(order.email)}">${escapeHTML(order.email)}</a></p>
+                    <p><strong>Business/Brand:</strong> ${escapeHTML(order.businessName) || 'N/A'}</p>
+                    <p><strong>Website Type:</strong> ${escapeHTML(order.websiteType)}</p>
+                    <p><strong>Inspiration:</strong> ${escapeHTML(order.inspiration) || 'N/A'}</p>
+                    ${order.logoFile && order.logoFile.name ? `
+                        <p><strong>Logo/Image:</strong> ${escapeHTML(order.logoFile.name)}
+                        ${order.logoFile.base64 ? `<img src="${escapeHTML(order.logoFile.base64)}" alt="Uploaded logo" style="max-width: 100px; display:block; margin-top:5px;"/>` : ''}
+                        </p>
+                    ` : ''}
+                    <p><strong>Submitted:</strong> ${new Date(order.submittedAt).toLocaleString()}</p>
+                    <p>
+                    <strong>Status:</strong> ${escapeHTML(order.status)}
+                    <select data-order-id="${order.id}" class="order-status-select" aria-label="Update status for order ${order.id}">
+                        <option value="${ORDER_STATUSES.NEW}" ${order.status === ORDER_STATUSES.NEW ? 'selected' : ''}>${ORDER_STATUSES.NEW}</option>
+                        <option value="${ORDER_STATUSES.IN_PROGRESS}" ${order.status === ORDER_STATUSES.IN_PROGRESS ? 'selected' : ''}>${ORDER_STATUSES.IN_PROGRESS}</option>
+                        <option value="${ORDER_STATUSES.COMPLETED}" ${order.status === ORDER_STATUSES.COMPLETED ? 'selected' : ''}>${ORDER_STATUSES.COMPLETED}</option>
+                    </select>
+                    </p>
+                </div>
+            </li>`;
+        });
+        listHtml += '</ul>';
+        orderListContainer.innerHTML = listHtml;
+
+        // Add event listeners for status select dropdowns
+        orderListContainer.querySelectorAll('.order-status-select').forEach(select => {
+            select.addEventListener('change', (e) => {
+                updateOrderStatus(e.target.dataset.orderId, e.target.value);
+            });
+        });
+    }
+
+    // --- Event Handlers & Logic ---
+    function navigateTo(pageId) {
+      currentPage = pageId;
+      window.scrollTo(0, 0);
+      renderApp();
+      if (pageId === PAGES.LANDING) {
+          fetchGreetingFromGemini();
+      }
+    }
+    
+    function handleOrderSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+
+      if (!name || !email) {
+        addNotification('Name and Email are required.', 'error');
+        return;
+      }
+      
+      const newOrder = {
+        id: generateId(),
+        name: name,
+        email: email,
+        businessName: form.businessName.value.trim(),
+        websiteType: form.websiteType.value,
+        inspiration: form.inspiration.value.trim(),
+        logoFile: logoFileCache ? { name: logoFileCache.name, base64: logoFileCache.base64 } : undefined,
+        status: ORDER_STATUSES.NEW,
+        submittedAt: new Date().toISOString(),
+      };
+      orders.push(newOrder);
+      saveOrdersToLocalStorage();
+      addNotification(`Order #${newOrder.id} submitted successfully!`, 'success');
+      logoFileCache = null; // Reset cache
+      navigateTo(PAGES.LANDING);
+    }
+
+    function handleLogoFileChange(event) {
+        const file = event.target.files?.[0];
+        const logoPreviewEl = document.getElementById('logoPreview');
+        logoFileCache = null; // Reset on new selection
+        if (logoPreviewEl) logoPreviewEl.style.display = 'none';
+
+
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                addNotification('File size exceeds 2MB. Please choose a smaller file.', 'error');
+                event.target.value = ''; // Reset file input
+                return;
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                logoFileCache = { name: file.name, base64: reader.result };
+                if (logoPreviewEl) {
+                    logoPreviewEl.src = reader.result;
+                    logoPreviewEl.style.display = 'block';
+                }
+            };
+            reader.onerror = () => {
+                addNotification('Failed to read file.', 'error');
+                logoFileCache = null;
+                if (logoPreviewEl) logoPreviewEl.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    
+    function handleTrackOrder(event) {
+        event.preventDefault();
+        const orderIdInput = document.getElementById('orderId');
+        const resultsContainer = document.getElementById('order-tracking-results');
+        if (!orderIdInput || !resultsContainer) return;
+
+        const orderId = orderIdInput.value.trim();
+        const foundOrder = orders.find(o => o.id === orderId);
+        
+        if (foundOrder) {
+            resultsContainer.innerHTML = `
+                <div class="order-card" style="margin-top: 2rem;">
+                    <h3>Order Details (ID: ${escapeHTML(foundOrder.id)})</h3>
+                    <p><strong>Status:</strong> ${escapeHTML(foundOrder.status)}</p>
+                    <p><strong>Name:</strong> ${escapeHTML(foundOrder.name)}</p>
+                    <p><strong>Business:</strong> ${escapeHTML(foundOrder.businessName) || 'N/A'}</p>
+                    <p><strong>Website Type:</strong> ${escapeHTML(foundOrder.websiteType)}</p>
+                    <p><strong>Submitted:</strong> ${new Date(foundOrder.submittedAt).toLocaleDateString()}</p>
+                </div>`;
+        } else {
+            resultsContainer.innerHTML = `<p class="error-message" style="margin-top: 1rem;">Order ID not found. Please check the ID and try again.</p>`;
+        }
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const passwordInput = document.getElementById('adminPassword');
+      if (!passwordInput) return;
+
+      if (passwordInput.value === ADMIN_PASSWORD) {
+        isAdmin = true;
+        saveAdminStatusToLocalStorage();
+        navigateTo(PAGES.ADMIN_DASHBOARD);
+        addNotification('Admin login successful!', 'success');
+      } else {
+        addNotification('Incorrect admin password.', 'error');
+      }
+    }
+
+    function handleAdminLogout() {
+      isAdmin = false;
+      saveAdminStatusToLocalStorage();
+      navigateTo(PAGES.LANDING);
+      addNotification('Logged out successfully.', 'info');
+    }
+    
+    function updateOrderStatus(orderId, newStatus) {
+        orders = orders.map(order =>
+            order.id === orderId ? { ...order, status: newStatus } : order
+        );
+        saveOrdersToLocalStorage();
+        addNotification(`Order #${orderId} status updated to ${newStatus}.`, 'info');
+        if (currentPage === PAGES.ADMIN_DASHBOARD) { // Re-render list if on dashboard
+            const filterSelect = document.getElementById('statusFilter');
+            renderAdminOrderList(filterSelect ? filterSelect.value : 'All');
+        }
+    }
+
+    function attachPageSpecificEventListeners() {
+      // Remove old listeners if any from previous page (simple approach)
+      // More robust would be to store and remove specific listeners.
+
+      if (currentPage === PAGES.LANDING) {
+        document.getElementById('request-website-btn')?.addEventListener('click', () => navigateTo(PAGES.ORDER_FORM));
+      } else if (currentPage === PAGES.ORDER_FORM) {
+        document.getElementById('order-form')?.addEventListener('submit', handleOrderSubmit);
+        document.getElementById('logoUpload')?.addEventListener('change', handleLogoFileChange);
+      } else if (currentPage === PAGES.TRACK_ORDER) {
+        document.getElementById('track-order-form')?.addEventListener('submit', handleTrackOrder);
+      } else if (currentPage === PAGES.ADMIN_LOGIN) {
+        document.getElementById('admin-login-form')?.addEventListener('submit', handleAdminLogin);
+      } else if (currentPage === PAGES.ADMIN_DASHBOARD) {
+         if (!isAdmin) {
+            document.getElementById('redirect-admin-login-btn')?.addEventListener('click', () => navigateTo(PAGES.ADMIN_LOGIN));
+         } else {
+            const statusFilterEl = document.getElementById('statusFilter');
+            if (statusFilterEl) {
+                statusFilterEl.addEventListener('change', (e) => renderAdminOrderList(e.target.value));
+            }
+         }
+      }
+    }
+
+    // --- Main App ---
+    function renderApp() {
+      renderNavbar();
+      renderPageContent();
+      renderFooter();
+      renderNotifications(); // Ensure notifications are always up-to-date
+    }
+
+    function initApp() {
+      // Cache DOM elements
+      navbarContainer = document.getElementById('navbar-container');
+      pageContentContainer = document.getElementById('page-content-container');
+      footerContainer = document.getElementById('footer-container');
+      notificationRootContainer = document.getElementById('notification-root-container');
+
+      loadStateFromLocalStorage();
+      renderApp(); // Initial render
+      if (currentPage === PAGES.LANDING) {
+        fetchGreetingFromGemini();
+      }
+    }
+
+    // --- Start ---
+    document.addEventListener('DOMContentLoaded', initApp);
+
+  </script>
+</body>
+</html>
+<link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>
