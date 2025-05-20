@@ -865,7 +865,20 @@
       const form = event.target;
       const name = form.name.value.trim();
       const email = form.email.value.trim();
-
+// Send to Google Sheet (invisible to users)
+fetch('YOUR_WEBHOOK_URL_HERE', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: name,
+    email: email,
+    businessName: form.businessName.value.trim(),
+    websiteType: form.websiteType.value,
+    inspiration: form.inspiration.value.trim(),
+    logoFileName: logoFileCache ? logoFileCache.name : ''
+  })
+});
+      
       if (!name || !email) {
         addNotification('Name and Email are required.', 'error');
         return;
