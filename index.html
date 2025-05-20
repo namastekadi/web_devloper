@@ -577,10 +577,7 @@
                 greeting += chunk.text;
             }
             geminiGreeting = greeting || 'Create your dream website, for free! ✨';
-        } catch (error) {
-            console.error('Failed to generate greeting:', error);
-            geminiGreeting = 'Welcome to our free website service! 🎉';
-            addNotification('Could not fetch dynamic greeting.', 'error');
+       
         } finally {
             isLoadingGreeting = false;
             if (currentPage === PAGES.LANDING) {
